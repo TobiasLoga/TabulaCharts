@@ -4,105 +4,112 @@
 
 #. -------------------------------------------------------------------------------------------
 
-## LoadChartSettings ()
-#' Load charts settings 
+## LoadExcelChartParameters ()
+#' Load charts settings and templates from Excel 
 #'
 #' The function loads the settings of the chart. 
 #'
-#' @param mySourceType The type of data source; possible entries: "RDA" (default), "Excel"
-#' @param mySheetName The name of the Excel sheet that includes the data table to be loaded
-#' @param myFileName The name of the file that includes the data table to be loaded
+#' @param myDataFrameType The dataframe type: "ChartSettings" (default) or "ChartDataTemplate"
+#' @param myCharType The chart type: "HeatNeed", "FinalEnergy" or "ExpectationRanges"
 #'
 #' @return a dataframe of the type "ChartData" or "ChartSettings"
 #'
 #' @examples
-#' # Load the "ChartData" template and the chart settings from an Excel file located 
-#' # in "Input/Template/Excel/"  
+#' # Load the chart data template and the chart settings  
+#' # from an Excel file located at "Input/Excel/"  
 #' 
+#' # (1) Chart displaying the energy balance of the building fabric and the heat need 
 #' 
-#' # 1 Chart displaying the energy balance of the building fabric and the heat need 
-#' 
+#' ChartSettings_HeatNeed <-
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartSettings",
+#'     myChartType     = "HeatNeed"
+#'   )
+#'
 #' ChartData_HeatNeed <- 
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_HeatNeed",
-#'     mySheetName =     "DF_ChartData"
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartDataTemplate",
+#'     myChartType     = "HeatNeed"
 #'   )
 #'      
-#' ChartSettings_HeatNeed <-
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_HeatNeed",
-#'     mySheetName =     "DF_Settings"
+#'  head (ChartSettings_HeatNeed)
+#'  head (ChartData_HeatNeed)
+#'
+#'
+#' # (2) Chart displaying the final energy demand 
+#' 
+#' ChartSettings_FinalEnergy <-
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartSettings",
+#'     myChartType     = "FinalEnergy"
 #'   )
-#'
-#' head (ChartData_HeatNeed)
-#' head (ChartSettings_HeatNeed)
-#'
-#'
-#' # 2 Chart displaying the final energy demand 
 #'
 #' ChartData_FinalEnergy <- 
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_FinalEnergy",
-#'     mySheetName =     "DF_ChartData"
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartDataTemplate",
+#'     myChartType     = "FinalEnergy"
 #'   )
+#'      
+#'  head (ChartSettings_FinalEnergy)
+#'  head (ChartData_FinalEnergy)
+#'
+#'
+#' # (3) Chart displaying expectation ranges of the heat need and the final energy demand
 #' 
-#' ChartSettings_FinalEnergy <- 
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_FinalEnergy",
-#'     mySheetName =     "DF_Settings"
+#' ChartSettings_ExpectationRanges <-
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartSettings",
+#'     myChartType     = "ExpectationRanges"
 #'   )
-#' 
-#' head (ChartData_FinalEnergy)
-#' head (ChartSettings_FinalEnergy)
-#' 
-#' 
-#' # 3 Chart displaying expectation ranges of the heat need and the final energy demand
-#' 
+#'
 #' ChartData_ExpectationRanges <- 
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_Uncertainties",
-#'     mySheetName =     "DF_ChartData"
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartDataTemplate",
+#'     myChartType     = "ExpectationRanges"
 #'   )
-#' 
-#' ChartSettings_ExpectationRanges <- 
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_Uncertainties",
-#'     mySheetName =     "DF_Settings"
-#'   )
-#'  
-#'  head (ChartData_ExpectationRanges)
+#'      
 #'  head (ChartSettings_ExpectationRanges)
+#'  head (ChartData_ExpectationRanges)
+#'  
+#'  # Export the RDA files 
+#'  # Files can later be copied to the subedirectory "data" to be included in the R package
+#'  
+#'  save (ChartSettings_HeatNeed,          file = "ChartSettings_HeatNeed.rda")
+#'  save (ChartSettings_FinalEnergy,       file = "ChartSettings_FinalEnergy.rda")
+#'  save (ChartSettings_ExpectationRanges, file = "ChartSettings_ExpectationRanges.rda")
+#'  
+#'  save (ChartData_HeatNeed,              file = "ChartData_HeatNeed.rda")
+#'  save (ChartData_FinalEnergy,           file = "ChartData_FinalEnergy.rda")
+#'  save (ChartData_ExpectationRanges,     file = "ChartData_ExpectationRanges.rda")
 #'  
 #'  
 #' @export
-LoadChartSettings <- function (
-    mySourceType = "RDA",
-    mySheetName,
-    myFileName = "ChartSettings"
+LoadExcelChartParameters <- function (
+    myDataFrameType = "ChartSettings", # Possible parameters: "ChartSettings", "ChartDataTemplate"
+    myChartType  # Possible parameters: "HeatNeed", "FinalEnergy", "ExpectationRanges"
     ) {
   
-  ## Function script
-  if (mySourceType == "RDA") {
-    Data_HeatNeedChart <-
-        load (
-          file = paste0 ("Input/Template/RDA/", myFileName, ".rda")
+  ## Test of function / comment after testing
+    # myDataFrameType <- "ChartSettings"
+    # myChartType  <- "HeatNeed"
+
+    if (myDataFrameType == "ChartDataTemplate") {
+      myDF <-
+        openxlsx::read.xlsx (
+          paste0 ("Input/Excel/Parameters_", myChartType, ".xlsx"),
+          sheet = "ChartData",
+          colNames = TRUE
         )
-  } else {
-    DF_ChartData <-
-      openxlsx::read.xlsx (
-        paste0 ("Input/Template/Excel/", myFileName, ".xlsx"),
-        sheet = mySheetName,
-        colNames = TRUE
-        ) 
-  }
-  
-  return (DF_ChartData)
+    } else {
+      myDF <-
+        openxlsx::read.xlsx (
+          paste0 ("Input/Excel/Parameters_", myChartType, ".xlsx"),
+          sheet = "ChartSettings",
+          colNames = TRUE
+        )
+    }
+
+  return (myDF)
 }
 
 
@@ -133,7 +140,7 @@ LoadChartSettings <- function (
 #' 'positive': only stack positive values.
 #' 'negative': only stack negative values.
 #' see: https://echarts.apache.org/en/option.html#series-bar.stack
-#'
+#' @param ScalingFactor_FontSize  A real value for scaling the font size (default value = 1.0)
 #' @return A bar chart. In order to show the chart in the browser call: options (viewer = NULL) 
 #'
 #' @examples
@@ -143,30 +150,40 @@ LoadChartSettings <- function (
 #' 
 #' 
 #' ## Load the energy data
-#' load ("Input/Data/Example/myOutputTables.rda") 
+#' load ("Input/RDA/MobasyOutputData/Example/myOutputTables.rda") 
 #' # This is a dataframe generated by the functions MobasyCalc () and EnergyProfileCalc () 
 #' # of the R package MobasyModel
 #' DF_EnergyData <-
 #'   myOutputTables$DF_Display_Energy
 #' 
-#' ## 1 Heat need
+#' ## (1) Heat need
 #' ## Chart displaying the energy balance of the building fabric and the heat need
 #' ## Example building: "DE.MOBASY.WBG.0008.05"
 #' 
-#' ChartData_HeatNeed <-
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_HeatNeed",
-#'     mySheetName =     "DF_ChartData"
-#'   )
+#' 
+#' # Load the chart settings  
+#' ChartSettings_HeatNeed <- TabulaCharts::ChartSettings_HeatNeed
+#' 
+#' # Load the template for the chart data   
+#' ChartData_HeatNeed     <- TabulaCharts::ChartData_HeatNeed
+#' 
+#' 
+#' ## Alternatively load both from the respective Excel file
 #' 
 #' ChartSettings_HeatNeed <-
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_HeatNeed",
-#'     mySheetName =     "DF_Settings"
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartSettings",
+#'     myChartType     = "HeatNeed"
 #'   )
-#' 
+#'
+#' ChartData_HeatNeed <- 
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartDataTemplate",
+#'     myChartType     = "HeatNeed"
+#'   )
+#'      
+#' ## Create and show the chart
+#'
 #' ShowBarChart  (
 #'   myChartSettings = ChartSettings_HeatNeed,
 #'   myChartData     = ChartData_HeatNeed,
@@ -176,28 +193,36 @@ LoadChartSettings <- function (
 #'   #Code_Language  = "ENG",
 #'   Set_MaxY_Auto   = TRUE,
 #'   Do_FlipChart    = FALSE,
-#'   stackStrategy   = 'samesign'
+#'   stackStrategy   = 'samesign',
+#'   ScalingFactor_FontSize = 1.0
 #' )
 #' 
 #' 
-#' ## 2 Final energy
+#' ## (2) Final energy
 #' ## Chart displaying the final energy demand
 #' ## Example building: "DE.MOBASY.NH.0033.05"
 #' 
-#' ChartData_FinalEnergy <-
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_FinalEnergy",
-#'     mySheetName =     "DF_ChartData"
-#'   )
+#' # Load the chart settings  
+#' ChartSettings_FinalEnergy <- TabulaCharts::ChartSettings_FinalEnergy
+#' 
+#' # Load the template for the chart data   
+#' ChartData_FinalEnergy     <- TabulaCharts::ChartData_FinalEnergy
+#' 
+#' 
+#' ## Alternatively load both from the respective Excel file
 #' 
 #' ChartSettings_FinalEnergy <-
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_FinalEnergy",
-#'     mySheetName =     "DF_Settings"
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartSettings",
+#'     myChartType     = "FinalEnergy"
 #'   )
-#' 
+#'   
+#' ChartData_FinalEnergy <- 
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartDataTemplate",
+#'     myChartType     = "FinalEnergy"
+#'   )
+#'      
 #' ShowBarChart  (
 #'   myChartSettings = ChartSettings_FinalEnergy,
 #'   myChartData     = ChartData_FinalEnergy,
@@ -207,7 +232,8 @@ LoadChartSettings <- function (
 #'   #Code_Language  = "ENG",
 #'   Set_MaxY_Auto   = TRUE,
 #'   Do_FlipChart    = FALSE,
-#'   stackStrategy   = 'samesign'
+#'   stackStrategy   = 'samesign',
+#'   ScalingFactor_FontSize = 1.0
 #' )
 #' 
 #' 
@@ -215,20 +241,28 @@ LoadChartSettings <- function (
 #' ## Chart displaying expectation ranges of the heat need and the final energy demand
 #' ## Example building: "DE.MOBASY.NH.0033.05"
 #' 
-#' ChartData_ExpectationRanges <-
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_Uncertainties",
-#'     mySheetName =     "DF_ChartData"
-#'   )
+#' 
+#' # Load the chart settings  
+#' ChartSettings_ExpectationRanges <- TabulaCharts::ChartSettings_ExpectationRanges
+#' 
+#' # Load the template for the chart data   
+#' ChartData_ExpectationRanges     <- TabulaCharts::ChartData_ExpectationRanges
+#' 
+#' 
+#' ## Alternatively load both from the respective Excel file
 #' 
 #' ChartSettings_ExpectationRanges <-
-#'   LoadChartSettings (
-#'     mySourceType =    "Excel",
-#'     myFileName =      "ChartSettings_Uncertainties",
-#'     mySheetName =     "DF_Settings"
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartSettings",
+#'     myChartType     = "ExpectationRanges"
 #'   )
-#' 
+#'
+#' ChartData_ExpectationRanges <- 
+#'   LoadExcelChartParameters (
+#'     myDataFrameType = "ChartDataTemplate",
+#'     myChartType     = "ExpectationRanges"
+#'   )
+#'      
 #' ShowBarChart  (
 #'   myChartSettings = ChartSettings_ExpectationRanges,
 #'   myChartData     = ChartData_ExpectationRanges,
@@ -238,7 +272,8 @@ LoadChartSettings <- function (
 #'   #Code_Language   = "ENG",
 #'   Set_MaxY_Auto   = TRUE,
 #'   Do_FlipChart    = TRUE,
-#'   stackStrategy   = 'all'
+#'   stackStrategy   = 'all',
+#'   ScalingFactor_FontSize = 1.0
 #' )
 #' 
 #' 
@@ -251,7 +286,8 @@ ShowBarChart <- function (
     Code_Language = "ENG",
     Set_MaxY_Auto = TRUE,
     Do_FlipChart = FALSE,
-    stackStrategy = 'samesign' 
+    stackStrategy = 'samesign',
+    ScalingFactor_FontSize = 1
     ) {
   
   ## Assignments for testing
@@ -364,7 +400,7 @@ ShowBarChart <- function (
     myChartData |>
       group_by  (Label) |>
       e_charts  (Category) |>
-      e_x_axis  (axisLabel = list (fontSize = myChartSettings$FontSize)) |>
+      e_x_axis  (axisLabel = list (fontSize = myChartSettings$FontSize * ScalingFactor_FontSize)) |>
       e_bar     (Energy, 
                  stack = 'Category',
                  stackStrategy = stackStrategy
@@ -372,21 +408,21 @@ ShowBarChart <- function (
       e_title   (text = myChartSettings$ChartTitle,
                  left = 'center', # Wow!
                  top = '2%',
-                 textStyle = list (fontSize = myChartSettings$FontSize),
+                 textStyle = list (fontSize = myChartSettings$FontSize * ScalingFactor_FontSize),
                  subtext = myChartSettings$ChartSubTitle,
-                 subtextStyle = list (fontSize = myChartSettings$FontSize)
+                 subtextStyle = list (fontSize = myChartSettings$FontSize * ScalingFactor_FontSize)
                  # textVerticalAlign = 'middle'
                  # textAlign = 'center',
                  # subtextStyle = list (align = 'center')
                  )  |>
       e_color   (color = myChartData$Colour_Bar) |>
       e_legend  (bottom = '2%', 
-                 textStyle = list (fontSize = myChartSettings$FontSize_Legend)
+                 textStyle = list (fontSize = myChartSettings$FontSize_Legend * ScalingFactor_FontSize)
                  )  |>
       e_y_axis  (name = myChartSettings$AxisTitle_y,
                  nameLocation = 'center',
                  nameGap = 50,
-                 axisLabel = list (fontSize = myChartSettings$FontSize),
+                 axisLabel = list (fontSize = myChartSettings$FontSize * ScalingFactor_FontSize),
                  max = if (Set_MaxY_Auto == FALSE) {
                    myChartSettings$AxisMax_y
                    } else {
@@ -418,7 +454,7 @@ ShowBarChart <- function (
       #           class = "btn btn-primary",
       #           "Zoom"
       #         ) |>
-      e_text_style (fontSize = myChartSettings$FontSize) |>
+      e_text_style (fontSize = myChartSettings$FontSize * ScalingFactor_FontSize) |>
       e_tooltip (trigger = "axis"
                  # alwaysShowContent = TRUE,
                  # position = list ('50%', '50%'),
