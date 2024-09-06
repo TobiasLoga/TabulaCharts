@@ -94,7 +94,7 @@ ChartData_HeatNeed <-
 ## Create and show the chart
 
 ShowBarChart  (
-  myChartSettings = ChartSettings_HeatNeed,
+  myChartSettings = ChartSettings_HeatNeed [2, ],
   myChartData     = ChartData_HeatNeed,
   DF_EnergyData   = DF_EnergyData,
   Index_Dataset   = which (DF_EnergyData$ID_Dataset == "DE.MOBASY.WBG.0008.05"),
@@ -133,7 +133,7 @@ ChartData_FinalEnergy <-
   )
      
 ShowBarChart  (
-  myChartSettings = ChartSettings_FinalEnergy,
+  myChartSettings = ChartSettings_FinalEnergy [2, ],
   myChartData     = ChartData_FinalEnergy,
   DF_EnergyData   = DF_EnergyData,
   Index_Dataset   = which (DF_EnergyData$ID_Dataset == "DE.MOBASY.NH.0033.05"),
@@ -173,7 +173,7 @@ ChartData_ExpectationRanges <-
   )
      
 ShowBarChart  (
-  myChartSettings = ChartSettings_ExpectationRanges,
+  myChartSettings = ChartSettings_ExpectationRanges [2, ],
   myChartData     = ChartData_ExpectationRanges,
   DF_EnergyData   = DF_EnergyData,
   Index_Dataset   = which (DF_EnergyData$ID_Dataset == "DE.MOBASY.NH.0033.05"),
