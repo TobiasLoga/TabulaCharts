@@ -5,7 +5,7 @@
 \alias{ChartData_HeatNeed}
 \title{Chart data template heat need}
 \format{
-An object of class \code{data.frame} with 12 rows and 13 columns.
+An object of class \code{data.frame} with 12 rows and 16 columns.
 }
 \usage{
 ChartData_HeatNeed

@@ -2,3 +2,4 @@
 
 export(LoadExcelChartParameters)
 export(ShowBarChart)
+export(ShowBarChart_DataComparison)

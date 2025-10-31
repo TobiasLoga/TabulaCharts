@@ -5,7 +5,7 @@
 \alias{ChartData_FinalEnergy}
 \title{Chart data template final energy}
 \format{
-An object of class \code{data.frame} with 24 rows and 13 columns.
+An object of class \code{data.frame} with 24 rows and 16 columns.
 }
 \usage{
 ChartData_FinalEnergy

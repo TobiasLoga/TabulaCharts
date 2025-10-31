@@ -5,7 +5,7 @@
 \alias{ChartData_ExpectationRanges}
 \title{Chart data template expectation ranges}
 \format{
-An object of class \code{data.frame} with 36 rows and 13 columns.
+An object of class \code{data.frame} with 36 rows and 16 columns.
 }
 \usage{
 ChartData_ExpectationRanges
