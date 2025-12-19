@@ -1,7 +1,7 @@
 Package: TabulaCharts
 Title: Create charts for displaying the results of the TABULA energy performance calculation  
 Description: Column charts for visualising energy flow through building fabric in the heating season, final energy demand for heating and DHW, uncertainties of energy demand.
-Version: 0.1.3
+Version: 0.1.4
 Author@R: 
     person (given = "Tobias", family = "Loga", email = "t.loga@iwu.de", role = "aut", comment = c(ORCID = "0000-0001-5097-5613"))
 License: CC BY 4.0
@@ -11,5 +11,4 @@ RoxygenNote: 7.3.2
 LazyData: true
 Imports: 
     echarts4r,
-    openxlsx,
     AuxFunctions

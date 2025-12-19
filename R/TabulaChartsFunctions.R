@@ -94,19 +94,37 @@ LoadExcelChartParameters <- function (
     # myChartType  <- "HeatNeed"
 
     if (myDataFrameType == "ChartDataTemplate") {
-      myDF <-
-        openxlsx::read.xlsx (
-          paste0 ("Input/Excel/Parameters_", myChartType, ".xlsx"),
+      
+      myDF <- 
+        readxl::read_excel (
+          path = paste0 ("Input/Excel/Parameters_", myChartType, ".xlsx"),
           sheet = "ChartData",
-          colNames = TRUE
+          col_names = TRUE
         )
+
+      # myDF <-
+      #   openxlsx::read.xlsx (
+      #     paste0 ("Input/Excel/Parameters_", myChartType, ".xlsx"),
+      #     sheet = "ChartData",
+      #     colNames = TRUE
+      #   )
+      
     } else {
-      myDF <-
-        openxlsx::read.xlsx (
-          paste0 ("Input/Excel/Parameters_", myChartType, ".xlsx"),
+      
+      myDF <- 
+        readxl::read_excel (
+          path = paste0 ("Input/Excel/Parameters_", myChartType, ".xlsx"),
           sheet = "ChartSettings",
-          colNames = TRUE
+          col_names = TRUE
         )
+      
+      # myDF <-
+      #   openxlsx::read.xlsx (
+      #     paste0 ("Input/Excel/Parameters_", myChartType, ".xlsx"),
+      #     sheet = "ChartSettings",
+      #     colNames = TRUE
+      #   )
+      
     }
 
   return (myDF)
