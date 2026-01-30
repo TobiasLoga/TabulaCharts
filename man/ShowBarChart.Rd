@@ -54,6 +54,10 @@ or if predefined MaxY values from "myChartSettings" should be used}
 
 \item{y_Max_ManualInput}{A real valued use as a maximum value for the y-axis
 It is only applied if the value of Set_MaxY_Auto is FALSE and if y_Max_ManualInput is larger than 0}
+
+\item{Filter_Category}{a character stringor a list of character strings indicating if only a selection of
+categories should e used (# ) (2025-09-26: parameter supplemented)
+Default value: NA  Examples: "Heat need c("Heat need","Heat losses")}
 }
 \value{
 A bar chart. In order to show the chart in the browser call: options (viewer = NULL)

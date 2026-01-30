@@ -164,6 +164,9 @@ LoadExcelChartParameters <- function (
 #' or if predefined MaxY values from "myChartSettings" should be used   
 #' @param  y_Max_ManualInput A real valued use as a maximum value for the y-axis
 #' It is only applied if the value of Set_MaxY_Auto is FALSE and if y_Max_ManualInput is larger than 0  
+#' @param Filter_Category a character stringor a list of character strings indicating if only a selection of 
+#' categories should e used (# ) (2025-09-26: parameter supplemented)
+#' Default value: NA  Examples: "Heat need c("Heat need","Heat losses") 
 #' @return A bar chart. In order to show the chart in the browser call: options (viewer = NULL) 
 #'
 #' @examples
@@ -316,7 +319,7 @@ ShowBarChart <- function (
     ScalingFactor_FontSize = 1,
     Set_MaxY_Auto = TRUE,
     y_Max_ManualInput = 0,
-    Filter_Category = NA   # 2025-09-26
+    Filter_Category = NA  # NA # "Heat need" # c("Heat need","Heat losses") # 2025-09-26
     ) {
   
   ## Assignments for testing
@@ -671,8 +674,8 @@ if (Do_FlipChart == TRUE) {
 #' or if predefined MaxY values from "myChartSettings" should be used   
 #' @param  y_Max_ManualInput A real valued use as a maximum value for the y-axis
 #' It is only applied if the value of Set_MaxY_Auto is FALSE and if y_Max_ManualInput is larger than 0  
-#' @param Filter_Category A character string or a list of characterstrings to select categories for displaying 
-#' @param Filter_VarName  A character string or a list of characterstrings to select variable names for displaying 
+#' @param Filter_Category A character string or a list of character strings to select categories for displaying 
+#' @param Filter_VarName  A character string or a list of character strings to select variable names for displaying 
 #' @return A bar chart. In order to show the chart in the browser call: options (viewer = NULL) 
 #'
 #' @examples

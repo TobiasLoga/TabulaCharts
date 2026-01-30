@@ -56,9 +56,9 @@ or if predefined MaxY values from "myChartSettings" should be used}
 \item{y_Max_ManualInput}{A real valued use as a maximum value for the y-axis
 It is only applied if the value of Set_MaxY_Auto is FALSE and if y_Max_ManualInput is larger than 0}
 
-\item{Filter_Category}{A character string or a list of characterstrings to select categories for displaying}
+\item{Filter_Category}{A character string or a list of character strings to select categories for displaying}
 
-\item{Filter_VarName}{A character string or a list of characterstrings to select variable names for displaying}
+\item{Filter_VarName}{A character string or a list of character strings to select variable names for displaying}
 }
 \value{
 A bar chart. In order to show the chart in the browser call: options (viewer = NULL)
